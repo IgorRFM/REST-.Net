@@ -1,0 +1,11 @@
+C:\Users\Igor\Documents\Estudos\asp net REST\galeria\Galeria.Contracts\bin\Debug\net9.0\Galeria.Contracts.deps.json
+C:\Users\Igor\Documents\Estudos\asp net REST\galeria\Galeria.Contracts\bin\Debug\net9.0\Galeria.Contracts.dll
+C:\Users\Igor\Documents\Estudos\asp net REST\galeria\Galeria.Contracts\bin\Debug\net9.0\Galeria.Contracts.pdb
+C:\Users\Igor\Documents\Estudos\asp net REST\galeria\Galeria.Contracts\obj\Debug\net9.0\Galeria.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Igor\Documents\Estudos\asp net REST\galeria\Galeria.Contracts\obj\Debug\net9.0\Galeria.Contracts.AssemblyInfoInputs.cache
+C:\Users\Igor\Documents\Estudos\asp net REST\galeria\Galeria.Contracts\obj\Debug\net9.0\Galeria.Contracts.AssemblyInfo.cs
+C:\Users\Igor\Documents\Estudos\asp net REST\galeria\Galeria.Contracts\obj\Debug\net9.0\Galeria.Contracts.csproj.CoreCompileInputs.cache
+C:\Users\Igor\Documents\Estudos\asp net REST\galeria\Galeria.Contracts\obj\Debug\net9.0\Galeria.Contracts.dll
+C:\Users\Igor\Documents\Estudos\asp net REST\galeria\Galeria.Contracts\obj\Debug\net9.0\refint\Galeria.Contracts.dll
+C:\Users\Igor\Documents\Estudos\asp net REST\galeria\Galeria.Contracts\obj\Debug\net9.0\Galeria.Contracts.pdb
+C:\Users\Igor\Documents\Estudos\asp net REST\galeria\Galeria.Contracts\obj\Debug\net9.0\ref\Galeria.Contracts.dll

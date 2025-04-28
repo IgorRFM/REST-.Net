@@ -1,0 +1,20 @@
+@id=00000000-0000-0000-0000-000000000000
+PUT http://localhost:5267/arts/{{id}}
+Content-Type: application/json
+
+{
+    "title": "Butterfly Parade",
+    "description": "Uma mulher loira com cabelos tingidos em verde - a personagem 'Jolyne' da obra JJBA - com uma peça de roupa de borboleta",
+    "publishDate": "2025-04-08",
+    "artistName": "Igor Ribeiro",
+    "artistSocial": "@Artigor_",
+    "tags": [
+        "fanart",
+        "digital art",
+        "half body",
+        "jolyne"
+    ],
+    "type": [
+        "illustration"
+    ]
+}
