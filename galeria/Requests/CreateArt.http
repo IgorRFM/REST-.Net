@@ -17,3 +17,25 @@ Content-Type: application/json
         "illustration"
     ]
 }
+
+###
+
+POST http://localhost:5267/arts
+Content-Type: application/json
+
+{
+    "title": "a",
+    "description": "b",
+    "publishDate": "2025-04-08",
+    "artistName": "Igor Ribeiro",
+    "artistSocial": "@Artigor_",
+    "tags": [
+        "fanart",
+        "digital art",
+        "half body",
+        "jolyne"
+    ],
+    "type": [
+        "illustration"
+    ]
+}

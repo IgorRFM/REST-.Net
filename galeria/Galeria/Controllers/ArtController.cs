@@ -19,9 +19,7 @@ public class ArtsController : ApiController
 
     [HttpPost]
     public IActionResult CreateArt(CreateArtRequest request){
-        var art = new Art(
-            Guid.NewGuid(),
-            DateTime.UtcNow,
+        ErrorOr<Art> requestToArtResult = Art.Create(
             request.Title,
             request.Description,
             request.PublishDate,
@@ -30,6 +28,11 @@ public class ArtsController : ApiController
             request.Tags,
             request.Type
             );
+
+        if(requestToArtResult.IsError){
+            return Problem(requestToArtResult.Errors);
+        }
+        var art = requestToArtResult.Value;
 
         //todo salvar no bd
         ErrorOr<Created> createArtResult = _artService.CreateArt(art);
@@ -59,18 +62,20 @@ public class ArtsController : ApiController
     [HttpPut("{id:guid}")]
     public IActionResult UpsetArt(Guid id, UpsertArtRequest request){
 
-        var art = new Art(
-            id,
-            DateTime.UtcNow,
+        ErrorOr<Art> artRequest = Art.Create(
             request.Title,
             request.Description,
             request.PublishDate,
             request.ArtistName,
             request.ArtistSocial,
             request.Tags,
-            request.Type
+            request.Type,
+            id
             );
-        
+        if(artRequest.IsError){
+            return Problem(artRequest.Errors);
+        }
+        var art = artRequest.Value;
         ErrorOr<UpsertedArt> upsertedArtResult = _artService.UpsertArt(art);
         // return 201 se criou uma nova arte
         return upsertedArtResult.Match(
