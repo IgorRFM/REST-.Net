@@ -1,3 +1,4 @@
+using ErrorOr;
 using Galeria.Models;
 
 namespace Galeria.Services.Arts;
@@ -11,8 +12,23 @@ public class ArtService : IArtService
         _arts.Add(art.Id, art);
     }
 
-    public Art GetArt(Guid id)
+    public void DeleteArt(Guid id)
     {
-        return _arts[id];
+        _arts.Remove(id);
+    }
+
+    public ErrorOr<Art> GetArt(Guid id)
+    {
+        if(_arts.TryGetValue(id, out var art))
+        {
+            return art;
+        }
+
+        return Errors.Art.NotFound;
+    }
+
+    public void UpsertArt(Art art)
+    {
+        _arts[art.Id] = art;
     }
 }

@@ -1,8 +1,12 @@
+using ErrorOr;
 using Galeria.Models;
 
 namespace Galeria.Services.Arts;
 
 public interface IArtService{
     void CreateArt(Art art);
-    Art GetArt(Guid id);
+    ErrorOr<Art> GetArt(Guid id);
+    void DeleteArt(Guid id);
+    
+    void UpsertArt(Art art);
 }

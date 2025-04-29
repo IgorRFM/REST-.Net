@@ -1,0 +1,3 @@
+@id=6f712499-766c-46dd-98e8-d515f8ff8232
+DELETE  http://localhost:5267/arts/{{id}}
+
