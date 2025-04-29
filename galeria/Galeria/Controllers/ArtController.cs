@@ -32,25 +32,16 @@ public class ArtsController : ApiController
             );
 
         //todo salvar no bd
-        _artService.CreateArt(art);
-
-        var response = new ArtResponse(
-            art.Id,
-            art.LastModifiedDateTime,
-            art.Title,
-            art.Description,
-            art.PublishDate,
-            art.ArtistName,
-            art.ArtistSocial,
-            art.Tags,
-            art.Type
-        );
+        ErrorOr<Created> createArtResult = _artService.CreateArt(art);
         
-        return CreatedAtAction(
-            nameof(GetArt),
-            new {id=art.Id},
-            value: response);
+        return createArtResult.Match(
+            created => CreateAsGetArt(art),
+            errors => Problem(errors)
+        );
     }
+
+    
+    
 
     [HttpGet("{id:guid}")]
     public IActionResult GetArt(Guid id)
@@ -61,33 +52,9 @@ public class ArtsController : ApiController
             art => Ok(MapArtResponse(art)),
             errors => Problem(errors)
         );
-
-        // if (getArtResult.IsError && getArtResult.FirstError.Type == ErrorType.NotFound)
-        // {
-        //     return NotFound();
-        // }
-
-        // var art = getArtResult.Value;
-
-        // ArtResponse response = MapArtResponse(art);
-
-        // return Ok(response);
     }
 
-    private static ArtResponse MapArtResponse(Art art)
-    {
-        return new ArtResponse(
-                    art.Id,
-                    art.LastModifiedDateTime,
-                    art.Title,
-                    art.Description,
-                    art.PublishDate,
-                    art.ArtistName,
-                    art.ArtistSocial,
-                    art.Tags,
-                    art.Type
-                );
-    }
+    
 
     [HttpPut("{id:guid}")]
     public IActionResult UpsetArt(Guid id, UpsertArtRequest request){
@@ -104,14 +71,43 @@ public class ArtsController : ApiController
             request.Type
             );
         
-        _artService.UpsertArt(art);
+        ErrorOr<UpsertedArt> upsertedArtResult = _artService.UpsertArt(art);
         // return 201 se criou uma nova arte
-        return NoContent();
+        return upsertedArtResult.Match(
+            upserted => upserted.IsNewlyCreated ? CreateAsGetArt(art) : NoContent(),
+            errors => Problem(errors)
+        );
     }
 
     [HttpDelete("{id:guid}")]
     public IActionResult DeleteArt(Guid id){
-        _artService.DeleteArt(id);
-        return NoContent();
+        ErrorOr<Deleted> deletedArtResult = _artService.DeleteArt(id);
+
+        return deletedArtResult.Match(
+            deleted => NoContent(),
+            errors => Problem(errors)
+        );
+    }
+
+    private CreatedAtActionResult CreateAsGetArt(Art art)
+    {
+        return CreatedAtAction(
+            nameof(GetArt),
+            new {id=art.Id},
+            value: MapArtResponse(art));
+    }
+    private static ArtResponse MapArtResponse(Art art)
+    {
+        return new ArtResponse(
+                    art.Id,
+                    art.LastModifiedDateTime,
+                    art.Title,
+                    art.Description,
+                    art.PublishDate,
+                    art.ArtistName,
+                    art.ArtistSocial,
+                    art.Tags,
+                    art.Type
+                );
     }
 }

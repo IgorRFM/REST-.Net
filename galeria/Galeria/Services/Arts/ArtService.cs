@@ -1,4 +1,5 @@
 using ErrorOr;
+using Galeria.Controllers;
 using Galeria.Models;
 
 namespace Galeria.Services.Arts;
@@ -6,15 +7,18 @@ namespace Galeria.Services.Arts;
 public class ArtService : IArtService
 {
     private static readonly Dictionary<Guid,Art> _arts = new();
-    public void CreateArt(Art art)
+    public ErrorOr<Created> CreateArt(Art art)
     {
         // armazenando apenas na memória, implementar para alguma servidor
         _arts.Add(art.Id, art);
+        return Result.Created;
+        
     }
 
-    public void DeleteArt(Guid id)
+    public ErrorOr<Deleted> DeleteArt(Guid id)
     {
         _arts.Remove(id);
+        return Result.Deleted;
     }
 
     public ErrorOr<Art> GetArt(Guid id)
@@ -27,8 +31,10 @@ public class ArtService : IArtService
         return Errors.Art.NotFound;
     }
 
-    public void UpsertArt(Art art)
+    public ErrorOr<UpsertedArt> UpsertArt(Art art)
     {
+        var isNewlyCreated = !_arts.ContainsKey(art.Id);
         _arts[art.Id] = art;
+        return new UpsertedArt(isNewlyCreated);
     }
 }

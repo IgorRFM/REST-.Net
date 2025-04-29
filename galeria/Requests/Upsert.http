@@ -1,4 +1,4 @@
-@id=6f712499-766c-46dd-98e8-d515f8ff8232
+@id=32eef6f0-2b34-414a-b5a3-d3ab6c8ff562
 PUT http://localhost:5267/arts/{{id}}
 Content-Type: application/json
 
